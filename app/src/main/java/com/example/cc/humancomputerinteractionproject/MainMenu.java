@@ -23,17 +23,23 @@ public class MainMenu extends AppCompatActivity {
         power_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tvOn = !tvOn;
                 if (tvOn) {
+
+//                    if TV is turned ON, then turn it OFF
                     main_menu.setVisibility(View.GONE);
                     tv_menu.setVisibility(View.GONE);
 
                     screen_off.setVisibility(View.VISIBLE);
+
                 } else {
+
+//                    Else turn it ON
                     screen_off.setVisibility(View.GONE);
 
                     main_menu.setVisibility(View.VISIBLE);
+
                 }
+                tvOn = !tvOn;
             }
         });
 
