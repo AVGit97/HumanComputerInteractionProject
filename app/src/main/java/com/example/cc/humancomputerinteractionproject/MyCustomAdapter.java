@@ -7,19 +7,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
 
     private ArrayList<String> list;
+    private final String button1_txt;
     private final Context context;
+    private final String functionality;
 
-    MyCustomAdapter(ArrayList<String> list, Context context) {
+    static final String PLAY = "play";
+    static final String ADD = "add";
+
+    MyCustomAdapter(ArrayList<String> list, String button1_txt, String functionality, Context context) {
         this.list = list;
         this.context = context;
+        this.button1_txt = button1_txt;
+        this.functionality = functionality;
+    }
+
+    public ArrayList<String> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<String> list) {
+        this.list = list;
+        MyCustomAdapter.this.notifyDataSetChanged();
     }
 
     @Override
@@ -56,18 +75,63 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
         item_rmv_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //do something
-                RelativeLayout rl = (RelativeLayout) v.getParent();
+                LinearLayout ll = (LinearLayout) v.getParent();
+                RelativeLayout rl = (RelativeLayout) ll.getParent();
                 TextView tv = (TextView) rl.getChildAt(0);
 
-                String channel_name = tv.getText().toString();
+                String item_name = tv.getText().toString();
 
-                Log.d("BTN_", channel_name);
+                Log.d("BTN_RMV_PRESSED", item_name);
 
-                list.remove(getPosByString(channel_name));
+                int pos = getPosByString(item_name);
+                if (pos != -1) {
+                    list.remove(pos);
+                }
+
                 MyCustomAdapter.this.notifyDataSetChanged();
             }
         });
+
+        Button item_btn1 = view.findViewById(R.id.item_btn1);
+        item_btn1.setText(button1_txt);
+
+        View.OnClickListener onClickPlay = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                LinearLayout ll = (LinearLayout) v.getParent();
+                RelativeLayout rl = (RelativeLayout) ll.getParent();
+                TextView tv = (TextView) rl.getChildAt(0);
+
+                String item_name = tv.getText().toString();
+
+                Log.d("BTN_PLAY_PRESSED", item_name);
+
+                Toast.makeText(context, ("Now " + button1_txt + "ing " + item_name + "..."), Toast.LENGTH_LONG).show();
+            }
+        };
+
+        View.OnClickListener onClickAddToFavs = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // TODO Add to favourites list
+                LinearLayout ll = (LinearLayout) v.getParent();
+                RelativeLayout rl = (RelativeLayout) ll.getParent();
+                TextView tv = (TextView) rl.getChildAt(0);
+
+                String item_name = tv.getText().toString();
+
+                Log.d("BTN_ADD_PRESSED", item_name);
+            }
+        };
+
+        switch (functionality) {
+            case "play":
+                item_btn1.setOnClickListener(onClickPlay);
+                break;
+            case "add":
+                item_btn1.setOnClickListener(onClickAddToFavs);
+                break;
+        }
 
         return view;
     }

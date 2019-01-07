@@ -25,13 +25,23 @@ public class MainMenu extends AppCompatActivity {
 
         final FrameLayout tv_menu = findViewById(R.id.tv_menu);
         final FrameLayout tv_favs_menu = findViewById(R.id.tv_favs_menu);
+        final FrameLayout tv_all_menu = findViewById(R.id.tv_all_menu);
 
         final FrameLayout radio_menu = findViewById(R.id.radio_menu);
+        final FrameLayout radio_favs_menu = findViewById(R.id.radio_favs_menu);
+        final FrameLayout radio_all_menu = findViewById(R.id.radio_all_menu);
+
         final FrameLayout video_menu = findViewById(R.id.video_menu);
 
-        final FrameLayout[] menus = {main_menu, tv_menu, tv_favs_menu, radio_menu, video_menu};
+        final FrameLayout[] menus = {
+                main_menu,
+                tv_menu, tv_favs_menu, tv_all_menu,
+                radio_menu, radio_favs_menu, radio_all_menu,
+                video_menu
+        };
 
 //        HANDLE POWER BUTTON
+
         final Button power_btn = findViewById(R.id.power_button);
         power_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +67,10 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        //___________________________________________________________________________________________
+
 //        HANDLE TV MENU
+
         final Button tv_btn = findViewById(R.id.tv_button);
         tv_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,8 +99,10 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button tv_fav_btn = findViewById(R.id.tv_fav_button);
-        tv_fav_btn.setOnClickListener(new View.OnClickListener() {
+        //___________________________________________________________________________________________
+
+        final Button tv_favs_btn = findViewById(R.id.tv_favs_button);
+        tv_favs_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 tv_menu.setVisibility(View.GONE);
@@ -116,10 +131,57 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final ListView tv_favs_lv = findViewById(R.id.tv_favs_list);
+//        Add some favourite tv channels
+        ArrayList<String> tv_favs_list = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            tv_favs_list.add("TV" + i);
+        }
 
-        ArrayList<String> tv_favs_list = new ArrayList<>(Arrays.asList("Channel0", "Channel1", "Channel2", "Channel3", "Channel4", "Channel5", "Channel6", "Channel7"));
-        tv_favs_lv.setAdapter(new MyCustomAdapter(tv_favs_list, getApplicationContext()));
+        final ListView tv_favs_lv = findViewById(R.id.tv_favs_list);
+        tv_favs_lv.setAdapter(new MyCustomAdapter(tv_favs_list, "Watch", MyCustomAdapter.PLAY, getApplicationContext()));
+
+        //___________________________________________________________________________________________
+
+        final Button tv_all_btn = findViewById(R.id.tv_all_button);
+        tv_all_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv_menu.setVisibility(View.GONE);
+
+                tv_all_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button tv_all_main_btn = findViewById(R.id.tv_all_main_button);
+        tv_all_main_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv_all_menu.setVisibility(View.GONE);
+
+                main_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button tv_all_back_btn = findViewById(R.id.tv_all_back_button);
+        tv_all_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv_all_main_btn.setVisibility(View.GONE);
+
+                tv_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+//        Add all tv channels
+        ArrayList<String> tv_all_list = new ArrayList<>();
+        for (int i = 0; i < 15; i++) {
+            tv_all_list.add("TV" + i);
+        }
+
+        final ListView tv_all_lv = findViewById(R.id.tv_all_list);
+        tv_all_lv.setAdapter(new MyCustomAdapter(tv_all_list, "Add", MyCustomAdapter.ADD, getApplicationContext()));
+
+        //___________________________________________________________________________________________
 
 //        HANDLE RADIO MENU
         final Button radio_btn = findViewById(R.id.radio_button);
@@ -149,6 +211,90 @@ public class MainMenu extends AppCompatActivity {
                 radio_main_btn.performClick();
             }
         });
+
+        //___________________________________________________________________________________________
+
+        final Button radio_fav_btn = findViewById(R.id.radio_fav_button);
+        radio_fav_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_menu.setVisibility(View.GONE);
+
+                radio_favs_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button radio_favs_main_btn = findViewById(R.id.radio_favs_main_button);
+        radio_favs_main_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_favs_menu.setVisibility(View.GONE);
+
+                main_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button radio_favs_back_btn = findViewById(R.id.radio_favs_back_button);
+        radio_favs_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_favs_menu.setVisibility(View.GONE);
+
+                radio_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+//        Add some favourite radio stations
+        ArrayList<String> radio_favs_list = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            radio_favs_list.add("TV" + i);
+        }
+
+        final ListView radio_favs_lv = findViewById(R.id.radio_favs_list);
+        radio_favs_lv.setAdapter(new MyCustomAdapter(radio_favs_list, "Listen", MyCustomAdapter.PLAY, getApplicationContext()));
+
+        //___________________________________________________________________________________________
+
+        final Button radio_all_btn = findViewById(R.id.radio_all_button);
+        radio_all_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_menu.setVisibility(View.GONE);
+
+                radio_all_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button radio_all_main_btn = findViewById(R.id.radio_all_main_button);
+        radio_all_main_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_all_menu.setVisibility(View.GONE);
+
+                main_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button radio_all_back_btn = findViewById(R.id.radio_all_back_button);
+        radio_all_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_all_menu.setVisibility(View.GONE);
+
+                radio_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+//        Add all radio stations
+        ArrayList<String> radio_all_list = new ArrayList<>();
+        for (int i = 0; i < 15; i++) {
+            radio_all_list.add("TV" + i);
+        }
+
+        final ListView radio_all_lv = findViewById(R.id.radio_all_list);
+        radio_all_lv.setAdapter(new MyCustomAdapter(radio_all_list, "Add", MyCustomAdapter.ADD, getApplicationContext()));
+
+        //___________________________________________________________________________________________
 
 //        HANDLE VIDEO MENU
         final Button video_btn = findViewById(R.id.video_button);
