@@ -2,10 +2,14 @@ package com.example.cc.humancomputerinteractionproject;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -32,11 +36,14 @@ public class MainMenu extends AppCompatActivity {
 
         final FrameLayout video_menu = findViewById(R.id.video_menu);
 
+        final FrameLayout help_menu = findViewById(R.id.help_menu);
+
         final FrameLayout[] menus = {
                 main_menu,
                 tv_menu, tv_favs_menu, tv_all_menu,
                 radio_menu, radio_favs_menu, radio_all_menu,
-                video_menu
+                video_menu,
+                help_menu
         };
 
 //        HANDLE POWER BUTTON
@@ -47,7 +54,7 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View view) {
                 if (tvOn) {
 
-//                    if TV is turned ON, then turn it OFF => hide all menus
+//                    If TV is turned ON, then turn it OFF => hide all menus
                     for (FrameLayout menu : menus) {
                         menu.setVisibility(View.GONE);
                     }
@@ -62,7 +69,10 @@ public class MainMenu extends AppCompatActivity {
                     main_menu.setVisibility(View.VISIBLE);
 
                 }
+
                 tvOn = !tvOn;
+
+                Toast.makeText(getApplicationContext(), ("TV " + (tvOn ? "On" : "Off")), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -329,6 +339,63 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 video_main_btn.performClick();
+            }
+        });
+
+        //___________________________________________________________________________________________
+
+//        HANDLE HELP MENU
+        final Button help_btn = findViewById(R.id.help_button);
+        help_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                Hide all menus
+                for (FrameLayout menu : menus) {
+                    menu.setVisibility(View.GONE);
+                }
+
+                help_menu.setVisibility(View.VISIBLE);
+
+                if (!tvOn) {
+                    tvOn = true;
+                    Toast.makeText(getApplicationContext(), "TV On", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        final Button help_main_btn = findViewById(R.id.help_main_button);
+        help_main_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                help_menu.setVisibility(View.GONE);
+
+                main_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button help_back_btn = findViewById(R.id.help_back_button);
+        help_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                help_main_btn.performClick();
+            }
+        });
+
+        //___________________________________________________________________________________________
+
+//        HANDLE BRIGHTNESS POP UP
+        final Button brightness_btn = findViewById(R.id.brightness_button);
+        brightness_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                assert inflater != null;
+                View popUpView = inflater.inflate(R.layout.brightness_layout, null);
+
+                final PopupWindow popupWindow = new PopupWindow(popUpView, 500, 200, true);
+
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
             }
         });
     }
