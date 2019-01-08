@@ -1,21 +1,25 @@
 package com.example.cc.humancomputerinteractionproject;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainMenu extends AppCompatActivity {
 
     private boolean tvOn = false;
+
+    private int brightness_level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -384,19 +388,35 @@ public class MainMenu extends AppCompatActivity {
 
         //___________________________________________________________________________________________
 
+    }
+
 //        HANDLE BRIGHTNESS POP UP
-        final Button brightness_btn = findViewById(R.id.brightness_button);
-        brightness_btn.setOnClickListener(new View.OnClickListener() {
+    public void ShowPopup(View view) {
+        final Dialog myDialog = new Dialog(this);
+        myDialog.setContentView(R.layout.brightness_layout);
+
+        final SeekBar brightness_bar = myDialog.findViewById(R.id.brightness_bar);
+        brightness_bar.setProgress(brightness_level);
+
+        final Button brightness_ok_btn = myDialog.findViewById(R.id.brightness_ok_btn);
+        brightness_ok_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                assert inflater != null;
-                View popUpView = inflater.inflate(R.layout.brightness_layout, null);
-
-                final PopupWindow popupWindow = new PopupWindow(popUpView, 500, 200, true);
-
-                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                brightness_level = brightness_bar.getProgress();
+                myDialog.dismiss();
             }
         });
+
+        final Button brightness_cancel_btn = myDialog.findViewById(R.id.brightness_cancel_btn);
+        brightness_cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        Objects.requireNonNull(myDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.getWindow().setLayout(600, 250);
+        myDialog.show();
     }
 }
