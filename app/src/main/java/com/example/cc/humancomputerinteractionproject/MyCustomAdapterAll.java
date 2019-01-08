@@ -30,6 +30,15 @@ public class MyCustomAdapterAll extends BaseAdapter implements ListAdapter {
         this.favourites_list_adapter = favourites_list_adapter;
     }
 
+    public ArrayList<String> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<String> list) {
+        this.list = list;
+        MyCustomAdapterAll.this.notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return list.size();

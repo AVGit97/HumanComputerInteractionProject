@@ -33,10 +33,12 @@ public class MainMenu extends AppCompatActivity {
         final FrameLayout tv_menu = findViewById(R.id.tv_menu);
         final FrameLayout tv_favs_menu = findViewById(R.id.tv_favs_menu);
         final FrameLayout tv_all_menu = findViewById(R.id.tv_all_menu);
+        final FrameLayout tv_sort_menu = findViewById(R.id.tv_sort_menu);
 
         final FrameLayout radio_menu = findViewById(R.id.radio_menu);
         final FrameLayout radio_favs_menu = findViewById(R.id.radio_favs_menu);
         final FrameLayout radio_all_menu = findViewById(R.id.radio_all_menu);
+        final FrameLayout radio_sort_menu = findViewById(R.id.radio_sort_menu);
 
         final FrameLayout video_menu = findViewById(R.id.video_menu);
 
@@ -44,8 +46,8 @@ public class MainMenu extends AppCompatActivity {
 
         final FrameLayout[] menus = {
                 main_menu,
-                tv_menu, tv_favs_menu, tv_all_menu,
-                radio_menu, radio_favs_menu, radio_all_menu,
+                tv_menu, tv_favs_menu, tv_all_menu, tv_sort_menu,
+                radio_menu, radio_favs_menu, radio_all_menu, radio_sort_menu,
                 video_menu,
                 help_menu
         };
@@ -200,6 +202,43 @@ public class MainMenu extends AppCompatActivity {
 
         //___________________________________________________________________________________________
 
+        final Button tv_sort_btn = findViewById(R.id.tv_sort_button);
+        tv_sort_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv_menu.setVisibility(View.GONE);
+
+                tv_sort_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button tv_sort_main_btn = findViewById(R.id.tv_sort_main_button);
+        tv_sort_main_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv_sort_menu.setVisibility(View.GONE);
+
+                main_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button tv_sort_back_btn = findViewById(R.id.tv_sort_back_button);
+        tv_sort_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv_sort_menu.setVisibility(View.GONE);
+
+                tv_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final ListView tv_sort_lv = findViewById(R.id.tv_sort_list);
+        MyCustomAdapterSort tv_sort_lv_adapter = new MyCustomAdapterSort(tv_all_list, getApplicationContext());
+
+        tv_sort_lv.setAdapter(tv_sort_lv_adapter);
+
+        //___________________________________________________________________________________________
+
 //        HANDLE RADIO MENU
         final Button radio_btn = findViewById(R.id.radio_button);
         radio_btn.setOnClickListener(new View.OnClickListener() {
@@ -317,6 +356,43 @@ public class MainMenu extends AppCompatActivity {
 
         //___________________________________________________________________________________________
 
+        final Button radio_sort_btn = findViewById(R.id.radio_sort_button);
+        radio_sort_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_menu.setVisibility(View.GONE);
+
+                radio_sort_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button radio_sort_main_btn = findViewById(R.id.radio_sort_main_button);
+        radio_sort_main_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_sort_menu.setVisibility(View.GONE);
+
+                main_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button radio_sort_back_btn = findViewById(R.id.radio_sort_back_button);
+        radio_sort_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radio_sort_menu.setVisibility(View.GONE);
+
+                radio_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final ListView radio_sort_lv = findViewById(R.id.radio_sort_list);
+        MyCustomAdapterSort radio_sort_lv_adapter = new MyCustomAdapterSort(radio_all_list, getApplicationContext());
+
+        radio_sort_lv.setAdapter(radio_sort_lv_adapter);
+
+        //___________________________________________________________________________________________
+
 //        HANDLE VIDEO MENU
         final Button video_btn = findViewById(R.id.video_button);
         video_btn.setOnClickListener(new View.OnClickListener() {
@@ -419,4 +495,5 @@ public class MainMenu extends AppCompatActivity {
         myDialog.getWindow().setLayout(600, 250);
         myDialog.show();
     }
+
 }

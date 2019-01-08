@@ -67,7 +67,7 @@ public class MyCustomAdapterFavourites extends BaseAdapter implements ListAdapte
 
         //Handle buttons and add onClickListeners
 
-        Button item_play_btn = view.findViewById(R.id.favs_item_play);
+        Button item_play_btn = view.findViewById(R.id.favs_item_play_btn);
         item_play_btn.setText(button_play_txt);
         item_play_btn.setOnClickListener(new View.OnClickListener(){
             @Override
