@@ -15,30 +15,26 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
+public class MyCustomAdapterFavourites extends BaseAdapter implements ListAdapter {
 
     private ArrayList<String> list;
-    private final String button1_txt;
     private final Context context;
-    private final String functionality;
 
-    static final String PLAY = "play";
-    static final String ADD = "add";
+    private String button_play_txt;
 
-    MyCustomAdapter(ArrayList<String> list, String button1_txt, String functionality, Context context) {
+    MyCustomAdapterFavourites(ArrayList<String> list, String button_play_txt, Context context) {
         this.list = list;
         this.context = context;
-        this.button1_txt = button1_txt;
-        this.functionality = functionality;
+        this.button_play_txt = button_play_txt;
     }
 
-    public ArrayList<String> getList() {
+    ArrayList<String> getList() {
         return list;
     }
 
-    public void setList(ArrayList<String> list) {
+    void setList(ArrayList<String> list) {
         this.list = list;
-        MyCustomAdapter.this.notifyDataSetChanged();
+        MyCustomAdapterFavourites.this.notifyDataSetChanged();
     }
 
     @Override
@@ -62,16 +58,33 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             assert inflater != null;
-            view = inflater.inflate(R.layout.custom_layout, null);
+            view = inflater.inflate(R.layout.custom_layout_favourites, null);
         }
 
         //Handle TextView and display string from your list
-        TextView item_txt = view.findViewById(R.id.item_txt);
+        TextView item_txt = view.findViewById(R.id.favs_item_txt);
         item_txt.setText(list.get(position));
 
         //Handle buttons and add onClickListeners
-        Button item_rmv_btn = view.findViewById(R.id.item_rmv_btn);
 
+        Button item_play_btn = view.findViewById(R.id.favs_item_play);
+        item_play_btn.setText(button_play_txt);
+        item_play_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                LinearLayout ll = (LinearLayout) v.getParent();
+                RelativeLayout rl = (RelativeLayout) ll.getParent();
+                TextView tv = (TextView) rl.getChildAt(0);
+
+                String item_name = tv.getText().toString();
+
+                Log.d("BTN_PLAY_PRESSED", item_name);
+
+                Toast.makeText(context, ("Now " + button_play_txt.toLowerCase() + "ing " + item_name + "..."), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Button item_rmv_btn = view.findViewById(R.id.favs_item_rmv_btn);
         item_rmv_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -86,52 +99,12 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
                 int pos = getPosByString(item_name);
                 if (pos != -1) {
                     list.remove(pos);
+                    Toast.makeText(context, (item_name + " removed from favourites list"), Toast.LENGTH_LONG).show();
                 }
 
-                MyCustomAdapter.this.notifyDataSetChanged();
+                MyCustomAdapterFavourites.this.notifyDataSetChanged();
             }
         });
-
-        Button item_btn1 = view.findViewById(R.id.item_btn1);
-        item_btn1.setText(button1_txt);
-
-        View.OnClickListener onClickPlay = new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                LinearLayout ll = (LinearLayout) v.getParent();
-                RelativeLayout rl = (RelativeLayout) ll.getParent();
-                TextView tv = (TextView) rl.getChildAt(0);
-
-                String item_name = tv.getText().toString();
-
-                Log.d("BTN_PLAY_PRESSED", item_name);
-
-                Toast.makeText(context, ("Now " + button1_txt + "ing " + item_name + "..."), Toast.LENGTH_LONG).show();
-            }
-        };
-
-        View.OnClickListener onClickAddToFavs = new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                // TODO Add to favourites list
-                LinearLayout ll = (LinearLayout) v.getParent();
-                RelativeLayout rl = (RelativeLayout) ll.getParent();
-                TextView tv = (TextView) rl.getChildAt(0);
-
-                String item_name = tv.getText().toString();
-
-                Log.d("BTN_ADD_PRESSED", item_name);
-            }
-        };
-
-        switch (functionality) {
-            case "play":
-                item_btn1.setOnClickListener(onClickPlay);
-                break;
-            case "add":
-                item_btn1.setOnClickListener(onClickAddToFavs);
-                break;
-        }
 
         return view;
     }

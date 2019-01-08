@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -138,7 +137,9 @@ public class MainMenu extends AppCompatActivity {
         }
 
         final ListView tv_favs_lv = findViewById(R.id.tv_favs_list);
-        tv_favs_lv.setAdapter(new MyCustomAdapter(tv_favs_list, "Watch", MyCustomAdapter.PLAY, getApplicationContext()));
+        MyCustomAdapterFavourites tv_favs_lv_adapter = new MyCustomAdapterFavourites(tv_favs_list, "Watch", getApplicationContext());
+
+        tv_favs_lv.setAdapter(tv_favs_lv_adapter);
 
         //___________________________________________________________________________________________
 
@@ -166,7 +167,7 @@ public class MainMenu extends AppCompatActivity {
         tv_all_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tv_all_main_btn.setVisibility(View.GONE);
+                tv_all_menu.setVisibility(View.GONE);
 
                 tv_menu.setVisibility(View.VISIBLE);
             }
@@ -179,7 +180,9 @@ public class MainMenu extends AppCompatActivity {
         }
 
         final ListView tv_all_lv = findViewById(R.id.tv_all_list);
-        tv_all_lv.setAdapter(new MyCustomAdapter(tv_all_list, "Add", MyCustomAdapter.ADD, getApplicationContext()));
+        MyCustomAdapterAll tv_all_lv_adapter = new MyCustomAdapterAll(tv_all_list, "Watch", tv_favs_lv_adapter, getApplicationContext());
+
+        tv_all_lv.setAdapter(tv_all_lv_adapter);
 
         //___________________________________________________________________________________________
 
@@ -247,11 +250,13 @@ public class MainMenu extends AppCompatActivity {
 //        Add some favourite radio stations
         ArrayList<String> radio_favs_list = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            radio_favs_list.add("TV" + i);
+            radio_favs_list.add("Radio" + i);
         }
 
         final ListView radio_favs_lv = findViewById(R.id.radio_favs_list);
-        radio_favs_lv.setAdapter(new MyCustomAdapter(radio_favs_list, "Listen", MyCustomAdapter.PLAY, getApplicationContext()));
+        MyCustomAdapterFavourites radio_favs_lv_adapter = (new MyCustomAdapterFavourites(radio_favs_list, "Listen", getApplicationContext()));
+
+        radio_favs_lv.setAdapter(radio_favs_lv_adapter);
 
         //___________________________________________________________________________________________
 
@@ -288,11 +293,13 @@ public class MainMenu extends AppCompatActivity {
 //        Add all radio stations
         ArrayList<String> radio_all_list = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
-            radio_all_list.add("TV" + i);
+            radio_all_list.add("Radio" + i);
         }
 
         final ListView radio_all_lv = findViewById(R.id.radio_all_list);
-        radio_all_lv.setAdapter(new MyCustomAdapter(radio_all_list, "Add", MyCustomAdapter.ADD, getApplicationContext()));
+        MyCustomAdapterAll radio_all_lv_adapter = new MyCustomAdapterAll(radio_all_list, "Listen", radio_favs_lv_adapter, getApplicationContext());
+
+        radio_all_lv.setAdapter(radio_all_lv_adapter);
 
         //___________________________________________________________________________________________
 
