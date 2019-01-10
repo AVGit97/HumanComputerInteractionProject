@@ -320,32 +320,37 @@ public class MainMenu extends AppCompatActivity {
                 final ProgressBar tv_progress_bar = findViewById(R.id.tv_progress_bar);
                 final TextView tv_progress_txt = findViewById(R.id.tv_progress_txt);
 
-                tv_progress_i = 38;
+                boolean fixed = false;
+                if (fixed) {
+                    tv_progress_i = 38;
 
-                tv_progress_bar.setProgress(tv_progress_i);
-                tv_progress_txt.setText(String.valueOf(tv_progress_i + "%"));
+                    tv_progress_bar.setProgress(tv_progress_i);
+                    tv_progress_txt.setText(String.valueOf(tv_progress_i + "%"));
+                } else {
+                    tv_progress_bar.setProgress(tv_progress_i);
 
-                /*tv_progress_bar.setProgress(tv_progress_i);
+                    CountDownTimer countDownTimer = new CountDownTimer(10000, 100) {
+                        @Override
+                        public void onTick(long l) {
+                            Log.d("Log_tag", "Tick of Progress " + tv_progress_i + l);
+                            tv_progress_i++;
+                            tv_progress_bar.setProgress(tv_progress_i * 100/(10000/100));
 
-                CountDownTimer countDownTimer = new CountDownTimer(10000, 100) {
-                    @Override
-                    public void onTick(long l) {
-                        Log.d("Log_tag", "Tick of Progress " + tv_progress_i + l);
-                        tv_progress_i++;
-                        tv_progress_bar.setProgress(tv_progress_i * 100/(10000/100));
+                            tv_progress_txt.setText(String.valueOf(tv_progress_i + "%"));
+                        }
 
-                        tv_progress_txt.setText(String.valueOf(tv_progress_i + "%"));
-                    }
+                        @Override
+                        public void onFinish() {
+                            tabHost.setCurrentTab(2);
+                            tv_progress_i++;
+                            tv_progress_bar.setProgress(100);
 
-                    @Override
-                    public void onFinish() {
-                        tabHost.setCurrentTab(2);
-                        tv_progress_i++;
-                        tv_progress_bar.setProgress(100);
-                    }
-                };
+                            tv_progress_i = 0;
+                        }
+                    };
 
-                countDownTimer.start();*/
+                    countDownTimer.start();
+                }
             }
         });
 
@@ -361,7 +366,11 @@ public class MainMenu extends AppCompatActivity {
         tv_finish_search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO go back to tv all list
+                tabHost.setCurrentTab(0);
+
+                tv_search_menu.setVisibility(View.GONE);
+
+                tv_all_menu.setVisibility(View.VISIBLE);
             }
         });
 
