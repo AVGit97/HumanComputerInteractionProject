@@ -4,12 +4,17 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
+import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,6 +25,11 @@ public class MainMenu extends AppCompatActivity {
     private boolean tvOn = false;
 
     private int brightness_level;
+
+    private int current_channel;    // Position of the current tv channel
+    private int current_station;    // Position of the current radio station
+
+    private int tv_progress_i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +44,7 @@ public class MainMenu extends AppCompatActivity {
         final FrameLayout tv_favs_menu = findViewById(R.id.tv_favs_menu);
         final FrameLayout tv_all_menu = findViewById(R.id.tv_all_menu);
         final FrameLayout tv_sort_menu = findViewById(R.id.tv_sort_menu);
+        final FrameLayout tv_search_menu = findViewById(R.id.tv_search_menu);
 
         final FrameLayout radio_menu = findViewById(R.id.radio_menu);
         final FrameLayout radio_favs_menu = findViewById(R.id.radio_favs_menu);
@@ -46,7 +57,7 @@ public class MainMenu extends AppCompatActivity {
 
         final FrameLayout[] menus = {
                 main_menu,
-                tv_menu, tv_favs_menu, tv_all_menu, tv_sort_menu,
+                tv_menu, tv_favs_menu, tv_all_menu, tv_sort_menu, tv_search_menu,
                 radio_menu, radio_favs_menu, radio_all_menu, radio_sort_menu,
                 video_menu,
                 help_menu
@@ -236,6 +247,123 @@ public class MainMenu extends AppCompatActivity {
         MyCustomAdapterSort tv_sort_lv_adapter = new MyCustomAdapterSort(tv_all_list, getApplicationContext());
 
         tv_sort_lv.setAdapter(tv_sort_lv_adapter);
+
+        //___________________________________________________________________________________________
+
+        final Button tv_search_btn = findViewById(R.id.tv_search_button);
+        tv_search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv_menu.setVisibility(View.GONE);
+
+                tv_search_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button tv_search_main_btn = findViewById(R.id.tv_search_main_button);
+        tv_search_main_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv_search_menu.setVisibility(View.GONE);
+
+                main_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final Button tv_search_back_btn = findViewById(R.id.tv_search_back_button);
+        tv_search_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv_search_menu.setVisibility(View.GONE);
+
+                tv_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final TabHost tabHost = findViewById(R.id.tabHost);
+        tabHost.setup();
+
+        String tabText;
+        TabHost.TabSpec spec;
+
+        // Tab 1
+        tabText = "Βημα 1";
+        spec = tabHost.newTabSpec(tabText);
+        spec.setContent(R.id.tv_start_search_tab);
+        spec.setIndicator(tabText);
+        tabHost.addTab(spec);
+
+        //Tab 2
+        tabText = "Βημα 2";
+        spec = tabHost.newTabSpec(tabText);
+        spec.setContent(R.id.tv_search_tab);
+        spec.setIndicator(tabText);
+        tabHost.addTab(spec);
+
+        //Tab 3
+        tabText = "Βημα 3";
+        spec = tabHost.newTabSpec(tabText);
+        spec.setContent(R.id.tv_finish_search_tab);
+        spec.setIndicator(tabText);
+        tabHost.addTab(spec);
+
+        tabHost.getTabWidget().getChildTabViewAt(0).setEnabled(false);
+        tabHost.getTabWidget().getChildTabViewAt(1).setEnabled(false);
+        tabHost.getTabWidget().getChildTabViewAt(2).setEnabled(false);
+
+        final Button tv_start_search_btn = findViewById(R.id.tv_start_search_btn);
+        tv_start_search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tabHost.setCurrentTab(1);
+
+                final ProgressBar tv_progress_bar = findViewById(R.id.tv_progress_bar);
+                final TextView tv_progress_txt = findViewById(R.id.tv_progress_txt);
+
+                tv_progress_i = 38;
+
+                tv_progress_bar.setProgress(tv_progress_i);
+                tv_progress_txt.setText(String.valueOf(tv_progress_i + "%"));
+
+                /*tv_progress_bar.setProgress(tv_progress_i);
+
+                CountDownTimer countDownTimer = new CountDownTimer(10000, 100) {
+                    @Override
+                    public void onTick(long l) {
+                        Log.d("Log_tag", "Tick of Progress " + tv_progress_i + l);
+                        tv_progress_i++;
+                        tv_progress_bar.setProgress(tv_progress_i * 100/(10000/100));
+
+                        tv_progress_txt.setText(String.valueOf(tv_progress_i + "%"));
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        tabHost.setCurrentTab(2);
+                        tv_progress_i++;
+                        tv_progress_bar.setProgress(100);
+                    }
+                };
+
+                countDownTimer.start();*/
+            }
+        });
+
+        final Button tv_search_cancel_btn = findViewById(R.id.tv_search_cancel_btn);
+        tv_search_cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO cancel search
+            }
+        });
+
+        final Button tv_finish_search_btn = findViewById(R.id.tv_finish_search_btn);
+        tv_finish_search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO go back to tv all list
+            }
+        });
 
         //___________________________________________________________________________________________
 
