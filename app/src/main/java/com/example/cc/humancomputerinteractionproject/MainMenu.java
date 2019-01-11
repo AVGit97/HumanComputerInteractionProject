@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
@@ -65,7 +66,7 @@ public class MainMenu extends AppCompatActivity {
 
 //        HANDLE POWER BUTTON
 
-        final Button power_btn = findViewById(R.id.power_button);
+        final ImageButton power_btn = findViewById(R.id.power_button);
         power_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +98,7 @@ public class MainMenu extends AppCompatActivity {
 
 //        HANDLE TV MENU
 
-        final Button tv_btn = findViewById(R.id.tv_button);
+        final ImageButton tv_btn = findViewById(R.id.tv_button);
         tv_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +108,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button tv_main_btn = findViewById(R.id.tv_main_button);
+        final ImageButton tv_main_btn = findViewById(R.id.tv_main_button);
         tv_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +118,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button tv_back_btn = findViewById(R.id.tv_back_button);
+        final ImageButton tv_back_btn = findViewById(R.id.tv_back_button);
         tv_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +128,7 @@ public class MainMenu extends AppCompatActivity {
 
         //___________________________________________________________________________________________
 
-        final Button tv_favs_btn = findViewById(R.id.tv_favs_button);
+        final ImageButton tv_favs_btn = findViewById(R.id.tv_favs_button);
         tv_favs_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +138,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button tv_favs_main_btn = findViewById(R.id.tv_favs_main_button);
+        final ImageButton tv_favs_main_btn = findViewById(R.id.tv_favs_main_button);
         tv_favs_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,7 +148,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button tv_favs_back_btn = findViewById(R.id.tv_favs_back_button);
+        final ImageButton tv_favs_back_btn = findViewById(R.id.tv_favs_back_button);
         tv_favs_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,7 +171,7 @@ public class MainMenu extends AppCompatActivity {
 
         //___________________________________________________________________________________________
 
-        final Button tv_all_btn = findViewById(R.id.tv_all_button);
+        final ImageButton tv_all_btn = findViewById(R.id.tv_all_button);
         tv_all_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -180,7 +181,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button tv_all_main_btn = findViewById(R.id.tv_all_main_button);
+        final ImageButton tv_all_main_btn = findViewById(R.id.tv_all_main_button);
         tv_all_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,7 +191,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button tv_all_back_btn = findViewById(R.id.tv_all_back_button);
+        final ImageButton tv_all_back_btn = findViewById(R.id.tv_all_back_button);
         tv_all_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,7 +214,7 @@ public class MainMenu extends AppCompatActivity {
 
         //___________________________________________________________________________________________
 
-        final Button tv_sort_btn = findViewById(R.id.tv_sort_button);
+        final ImageButton tv_sort_btn = findViewById(R.id.tv_sort_button);
         tv_sort_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -223,7 +224,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button tv_sort_main_btn = findViewById(R.id.tv_sort_main_button);
+        final ImageButton tv_sort_main_btn = findViewById(R.id.tv_sort_main_button);
         tv_sort_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -233,7 +234,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button tv_sort_back_btn = findViewById(R.id.tv_sort_back_button);
+        final ImageButton tv_sort_back_btn = findViewById(R.id.tv_sort_back_button);
         tv_sort_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -250,7 +251,7 @@ public class MainMenu extends AppCompatActivity {
 
         //___________________________________________________________________________________________
 
-        final Button tv_search_btn = findViewById(R.id.tv_search_button);
+        final ImageButton tv_search_btn = findViewById(R.id.tv_search_button);
         tv_search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -260,7 +261,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button tv_search_main_btn = findViewById(R.id.tv_search_main_button);
+        final ImageButton tv_search_main_btn = findViewById(R.id.tv_search_main_button);
         tv_search_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -270,7 +271,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button tv_search_back_btn = findViewById(R.id.tv_search_back_button);
+        final ImageButton tv_search_back_btn = findViewById(R.id.tv_search_back_button);
         tv_search_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -377,7 +378,7 @@ public class MainMenu extends AppCompatActivity {
         //___________________________________________________________________________________________
 
 //        HANDLE RADIO MENU
-        final Button radio_btn = findViewById(R.id.radio_button);
+        final ImageButton radio_btn = findViewById(R.id.radio_button);
         radio_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -387,7 +388,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button radio_main_btn = findViewById(R.id.radio_main_button);
+        final ImageButton radio_main_btn = findViewById(R.id.radio_main_button);
         radio_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -397,7 +398,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button radio_back_btn = findViewById(R.id.radio_back_button);
+        final ImageButton radio_back_btn = findViewById(R.id.radio_back_button);
         radio_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -407,7 +408,7 @@ public class MainMenu extends AppCompatActivity {
 
         //___________________________________________________________________________________________
 
-        final Button radio_fav_btn = findViewById(R.id.radio_fav_button);
+        final ImageButton radio_fav_btn = findViewById(R.id.radio_favs_button);
         radio_fav_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -417,7 +418,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button radio_favs_main_btn = findViewById(R.id.radio_favs_main_button);
+        final ImageButton radio_favs_main_btn = findViewById(R.id.radio_favs_main_button);
         radio_favs_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -427,7 +428,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button radio_favs_back_btn = findViewById(R.id.radio_favs_back_button);
+        final ImageButton radio_favs_back_btn = findViewById(R.id.radio_favs_back_button);
         radio_favs_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -450,7 +451,7 @@ public class MainMenu extends AppCompatActivity {
 
         //___________________________________________________________________________________________
 
-        final Button radio_all_btn = findViewById(R.id.radio_all_button);
+        final ImageButton radio_all_btn = findViewById(R.id.radio_all_button);
         radio_all_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -460,7 +461,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button radio_all_main_btn = findViewById(R.id.radio_all_main_button);
+        final ImageButton radio_all_main_btn = findViewById(R.id.radio_all_main_button);
         radio_all_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -470,7 +471,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button radio_all_back_btn = findViewById(R.id.radio_all_back_button);
+        final ImageButton radio_all_back_btn = findViewById(R.id.radio_all_back_button);
         radio_all_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -493,7 +494,7 @@ public class MainMenu extends AppCompatActivity {
 
         //___________________________________________________________________________________________
 
-        final Button radio_sort_btn = findViewById(R.id.radio_sort_button);
+        final ImageButton radio_sort_btn = findViewById(R.id.radio_sort_button);
         radio_sort_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -503,7 +504,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button radio_sort_main_btn = findViewById(R.id.radio_sort_main_button);
+        final ImageButton radio_sort_main_btn = findViewById(R.id.radio_sort_main_button);
         radio_sort_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -513,7 +514,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button radio_sort_back_btn = findViewById(R.id.radio_sort_back_button);
+        final ImageButton radio_sort_back_btn = findViewById(R.id.radio_sort_back_button);
         radio_sort_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -531,7 +532,7 @@ public class MainMenu extends AppCompatActivity {
         //___________________________________________________________________________________________
 
 //        HANDLE VIDEO MENU
-        final Button video_btn = findViewById(R.id.video_button);
+        final ImageButton video_btn = findViewById(R.id.video_button);
         video_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -541,7 +542,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button video_main_btn = findViewById(R.id.video_main_button);
+        final ImageButton video_main_btn = findViewById(R.id.video_main_button);
         video_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -551,7 +552,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button video_back_btn = findViewById(R.id.video_back_button);
+        final ImageButton video_back_btn = findViewById(R.id.video_back_button);
         video_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -562,7 +563,7 @@ public class MainMenu extends AppCompatActivity {
         //___________________________________________________________________________________________
 
 //        HANDLE HELP MENU
-        final Button help_btn = findViewById(R.id.help_button);
+        final ImageButton help_btn = findViewById(R.id.help_button);
         help_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -581,7 +582,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button help_main_btn = findViewById(R.id.help_main_button);
+        final ImageButton help_main_btn = findViewById(R.id.help_main_button);
         help_main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -591,11 +592,31 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final Button help_back_btn = findViewById(R.id.help_back_button);
+        final ImageButton help_back_btn = findViewById(R.id.help_back_button);
         help_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 help_main_btn.performClick();
+            }
+        });
+
+        //___________________________________________________________________________________________
+
+        final ImageButton channel_loss_btn = findViewById(R.id.channel_loss_button);
+        channel_loss_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                help_menu.setVisibility(View.GONE);
+
+                tv_search_menu.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final ImageButton radio_loss_btn = findViewById(R.id.radio_loss_button);
+        radio_loss_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Redirect user to radio_search_menu
             }
         });
 
@@ -632,5 +653,11 @@ public class MainMenu extends AppCompatActivity {
         myDialog.getWindow().setLayout(600, 250);
         myDialog.show();
     }
+
+//        HANDLE INCREASE VOLUME BUTTON
+
+
+
+//        HANDLE INCREASE VOLUME BUTTON
 
 }

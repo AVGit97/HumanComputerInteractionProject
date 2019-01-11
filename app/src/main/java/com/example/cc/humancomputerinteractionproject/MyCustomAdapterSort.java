@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,7 +24,7 @@ public class MyCustomAdapterSort extends BaseAdapter implements ListAdapter {
     private String current_item;    // keeps the item that the users wants to move
     private boolean place = false;          // state of the sort button
 
-    private String button_txt = "Change position";
+    private int button_image = R.drawable.swap;
 
     MyCustomAdapterSort(ArrayList<String> list, Context context) {
         this.list = list;
@@ -48,6 +48,7 @@ public class MyCustomAdapterSort extends BaseAdapter implements ListAdapter {
 
     @Override
     public View getView(final int position, final View convertView, final ViewGroup parent) {
+        MyCustomAdapterSort.this.notifyDataSetChanged();
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -60,8 +61,8 @@ public class MyCustomAdapterSort extends BaseAdapter implements ListAdapter {
         item_txt.setText(list.get(position));
 
         //Handle buttons and add onClickListeners
-        final Button sort_btn = view.findViewById(R.id.sort_btn);
-        sort_btn.setText(button_txt);   // this will run every time notifyDataSetChanged() is called
+        ImageButton sort_btn = view.findViewById(R.id.sort_btn);
+        sort_btn.setImageResource(button_image);   // this will run every time notifyDataSetChanged() is called
         sort_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +80,7 @@ public class MyCustomAdapterSort extends BaseAdapter implements ListAdapter {
                     Log.d("PRINT_i_j", String.valueOf(i) + "_" + String.valueOf(j));
                     Collections.swap(list, i, j);   // list = pointer to all_list, we also change the all_list here
 
-                    button_txt = "Change position";
+                    button_image = R.drawable.swap;
 
                     MyCustomAdapterSort.this.notifyDataSetChanged();
 
@@ -91,7 +92,7 @@ public class MyCustomAdapterSort extends BaseAdapter implements ListAdapter {
 
                     current_item = item_name;
 
-                    button_txt = "Place here";
+                    button_image = R.drawable.back;
 
                     MyCustomAdapterSort.this.notifyDataSetChanged();
 

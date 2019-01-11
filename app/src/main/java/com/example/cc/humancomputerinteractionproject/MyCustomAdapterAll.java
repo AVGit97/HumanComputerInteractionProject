@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
@@ -57,6 +58,7 @@ public class MyCustomAdapterAll extends BaseAdapter implements ListAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
+        MyCustomAdapterAll.this.notifyDataSetChanged();
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             assert inflater != null;
@@ -68,8 +70,7 @@ public class MyCustomAdapterAll extends BaseAdapter implements ListAdapter {
         item_txt.setText(list.get(position));
 
 //        Handle buttons and add onClickListeners
-        Button item_play_btn = view.findViewById(R.id.all_item_play_btn);
-        item_play_btn.setText(button_play_txt);
+        ImageButton item_play_btn = view.findViewById(R.id.all_item_play_btn);
         item_play_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -85,7 +86,7 @@ public class MyCustomAdapterAll extends BaseAdapter implements ListAdapter {
             }
         });
 
-        Button item_add_btn = view.findViewById(R.id.all_item_add);
+        ImageButton item_add_btn = view.findViewById(R.id.all_item_add);
         item_add_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -118,7 +119,7 @@ public class MyCustomAdapterAll extends BaseAdapter implements ListAdapter {
             }
         });
 
-        Button item_rmv_btn = view.findViewById(R.id.all_item_rmv_btn);
+        ImageButton item_rmv_btn = view.findViewById(R.id.all_item_rmv_btn);
         item_rmv_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

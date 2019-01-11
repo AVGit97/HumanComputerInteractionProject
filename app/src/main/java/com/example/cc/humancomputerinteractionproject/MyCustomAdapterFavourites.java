@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
@@ -54,6 +55,7 @@ public class MyCustomAdapterFavourites extends BaseAdapter implements ListAdapte
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        MyCustomAdapterFavourites.this.notifyDataSetChanged();
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,8 +69,7 @@ public class MyCustomAdapterFavourites extends BaseAdapter implements ListAdapte
 
         //Handle buttons and add onClickListeners
 
-        Button item_play_btn = view.findViewById(R.id.favs_item_play_btn);
-        item_play_btn.setText(button_play_txt);
+        ImageButton item_play_btn = view.findViewById(R.id.favs_item_play_btn);
         item_play_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -84,7 +85,7 @@ public class MyCustomAdapterFavourites extends BaseAdapter implements ListAdapte
             }
         });
 
-        Button item_rmv_btn = view.findViewById(R.id.favs_item_rmv_btn);
+        ImageButton item_rmv_btn = view.findViewById(R.id.favs_item_rmv_btn);
         item_rmv_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
