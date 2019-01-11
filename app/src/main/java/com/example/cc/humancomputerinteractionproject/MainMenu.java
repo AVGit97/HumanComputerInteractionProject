@@ -27,8 +27,11 @@ public class MainMenu extends AppCompatActivity {
 
     private int brightness_level;
 
-    private int current_channel;    // Position of the current tv channel
-    private int current_station;    // Position of the current radio station
+    private int current_channel = 0;    // Position of the current tv channel
+    private final int channel_num = 15;
+
+    private int current_volume = 10;    // Position of the current radio station
+    private final int max_volume = 50;
 
     private int tv_progress_i = 0;
 
@@ -160,7 +163,7 @@ public class MainMenu extends AppCompatActivity {
 
 //        Add some favourite tv channels
         ArrayList<String> tv_favs_list = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < channel_num / 2; i++) {
             tv_favs_list.add("TV" + i);
         }
 
@@ -203,7 +206,7 @@ public class MainMenu extends AppCompatActivity {
 
 //        Add all tv channels
         ArrayList<String> tv_all_list = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < channel_num; i++) {
             tv_all_list.add("TV" + i);
         }
 
@@ -374,6 +377,9 @@ public class MainMenu extends AppCompatActivity {
                 tv_all_menu.setVisibility(View.VISIBLE);
             }
         });
+
+        final TextView tv_finish_search_txt = findViewById(R.id.tv_finish_search_txt);
+        tv_finish_search_txt.setText("Βρέθηαν " + channel_num + " κανάλια.");
 
         //___________________________________________________________________________________________
 
@@ -654,10 +660,46 @@ public class MainMenu extends AppCompatActivity {
         myDialog.show();
     }
 
-//        HANDLE INCREASE VOLUME BUTTON
+//        HANDLE VOLUME BUTTONS
+    public void increaseVolume(View view) {
+        if (current_volume < max_volume) {
+            current_volume++;
+        }
+        displayVolume();
+    }
 
+    public void decreaseVolume(View view) {
+        if (current_volume > 0) {
+            current_volume--;
+        }
+        displayVolume();
+    }
 
+    public void displayVolume() {
+        Toast.makeText(getApplicationContext(),"Volume set to " + current_volume, Toast.LENGTH_SHORT).show();
+    }
 
-//        HANDLE INCREASE VOLUME BUTTON
+//        HANDLE CHANNEL BUTTONS
+    public void nextChannel(View view) {
+        if (current_channel < channel_num) {
+            current_channel++;
+        } else {
+            current_channel = 0;
+        }
+        displayChannel();
+    }
+
+    public void previousChannel(View view) {
+        if (current_channel > 0) {
+            current_channel--;
+        } else {
+            current_channel = channel_num;
+        }
+        displayChannel();
+    }
+
+    private void displayChannel() {
+        Toast.makeText(getApplicationContext(),"Channel set to " + current_channel, Toast.LENGTH_SHORT).show();
+    }
 
 }
