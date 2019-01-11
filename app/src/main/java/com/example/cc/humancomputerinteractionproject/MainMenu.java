@@ -379,7 +379,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         final TextView tv_finish_search_txt = findViewById(R.id.tv_finish_search_txt);
-        tv_finish_search_txt.setText("Βρέθηαν " + channel_num + " κανάλια.");
+        tv_finish_search_txt.setText("Βρέθηκαν " + channel_num + " κανάλια.");
 
         //___________________________________________________________________________________________
 
